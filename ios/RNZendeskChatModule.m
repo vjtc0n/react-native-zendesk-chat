@@ -39,11 +39,14 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
       if (options[@"tags"]) {
         config.tags = options[@"tags"];
       }
-      config.preChatDataRequirements.name       = ZDCPreChatDataRequired;
-      config.preChatDataRequirements.email      = options[@"emailNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
-      config.preChatDataRequirements.phone      = options[@"phoneNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
-      config.preChatDataRequirements.department = options[@"departmentNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequiredEditable;
-      config.preChatDataRequirements.message    = options[@"messageNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
+
+      if (!options[@"disablePreChatForm"]) {
+        config.preChatDataRequirements.name       = options[@"nameNotRequired"] ?  ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
+        config.preChatDataRequirements.email      = options[@"emailNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
+        config.preChatDataRequirements.phone      = options[@"phoneNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
+        config.preChatDataRequirements.department = options[@"departmentNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequiredEditable;
+        config.preChatDataRequirements.message    = options[@"messageNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
+      }
     }];
   });
 }
