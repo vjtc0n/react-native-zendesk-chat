@@ -47,6 +47,10 @@ RCT_EXPORT_METHOD(startChat:(NSDictionary *)options) {
         config.preChatDataRequirements.department = options[@"departmentNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequiredEditable;
         config.preChatDataRequirements.message    = options[@"messageNotRequired"] ? ZDCPreChatDataNotRequired : ZDCPreChatDataRequired;
       }
+
+      if (options[@"disableTranscripts"]) {
+        config.emailTranscriptAction = ZDCEmailTranscriptActionNeverSend;
+      }
     }];
   });
 }
