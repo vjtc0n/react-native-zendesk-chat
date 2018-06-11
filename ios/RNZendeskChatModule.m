@@ -41,8 +41,9 @@ RCT_EXPORT_MODULE(RNZendeskChatModule);
   if (!hasListeners) return;
 
   NSArray *events = [[ZDCChatAPI instance] livechatLog];
-  if (events.count == 0) return;
+  if (events == nil || events.count == 0) return;
   ZDCChatEvent *event = [events lastObject];
+  if (event == nil) return;
 
   NSString *eventType;
   switch (event.type) {
